@@ -38,6 +38,9 @@ dependencies:
 
   equatable: ^2.0.5
   dartz: ^0.10.1
+  firebase_core: ^2.13.0
+  firebase_auth: ^4.7.3
+  cloud_firestore: ^4.9.0
   firebase_core: ^4.2.0
   cloud_firestore: ^6.0.3
   firebase_auth: ^4.4.0
