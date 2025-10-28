@@ -18,4 +18,6 @@ class AuthFailure extends Failure {
 
 class NoUserFailure extends Failure {
   const NoUserFailure([String? message]) : super(message);
+class CacheFailure extends Failure {
+  const CacheFailure([String? message]) : super(message);
 }
