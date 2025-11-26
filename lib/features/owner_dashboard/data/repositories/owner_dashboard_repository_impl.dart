@@ -3,8 +3,7 @@ import 'package:rental_inventory_booking_app/core/error/failures.dart';
 import '../../domain/entities/owner_dashboard.dart';
 import '../../domain/repositories/owner_dashboard_repository.dart';
 import '../datasources/owner_dashboard_remote_data_source.dart';
-import '../models/owner_dashboard_model.dart';
-import '../models/booking_model.dart';
+import 'package:rental_inventory_booking_app/features/booking/domain/entities/booking.dart';
 
 class OwnerDashboardRepositoryImpl implements OwnerDashboardRepository {
   final OwnerDashboardRemoteDataSource remoteDataSource;
