@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-
-import '../../state/inventory_notifier.dart';
 import '../providers/inventory_providers.dart';
 
 class InventoryDetailScreen extends ConsumerStatefulWidget {
