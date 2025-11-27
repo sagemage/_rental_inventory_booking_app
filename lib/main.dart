@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'routes.dart';
-import 'package:rental_inventory_booking_app/core/theme/theme.dart';
+import 'core/error/router/routes.dart';
+import 'core/error/theme/theme.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
