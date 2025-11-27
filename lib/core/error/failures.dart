@@ -9,11 +9,11 @@ abstract class Failure extends Equatable {
 }
 
 class ServerFailure extends Failure {
-  const ServerFailure([String? message]) : super(message);
+  const ServerFailure([super.message]);
 }
 
 class AuthFailure extends Failure {
-  const AuthFailure([String? message]) : super(message);
+  const AuthFailure([super.message]);
 }
 
 class NoUserFailure extends Failure {
@@ -22,4 +22,9 @@ class NoUserFailure extends Failure {
 
 class CacheFailure extends Failure {
   const CacheFailure([String? message]) : super(message);
+  const NoUserFailure([super.message]);
+}
+
+class CacheFailure extends Failure {
+  const CacheFailure([super.message]);
 }
