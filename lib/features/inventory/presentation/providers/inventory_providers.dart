@@ -12,6 +12,14 @@ final firebaseFirestoreProvider = Provider<FirebaseFirestore>((ref) {
 });
 
 /// Remote data source provider
+
+import '../../data/datasources/inventory_remote_data_source_impl.dart';
+import '../../data/repositories/inventory_repository_impl.dart';
+import '../../domain/usecases/get_inventory_list.dart';
+import '../state/inventory_notifier.dart';
+
+final firebaseFirestoreProvider = Provider<FirebaseFirestore>((ref) => FirebaseFirestore.instance);
+
 final inventoryRemoteDataSourceProvider = Provider<FirebaseInventoryRemoteDataSource>((ref) {
   final firestore = ref.read(firebaseFirestoreProvider);
   return FirebaseInventoryRemoteDataSource(firestore: firestore);
@@ -39,4 +47,7 @@ final inventoryNotifierProvider = StateNotifierProvider<InventoryNotifier, Inven
   final getList = ref.read(getInventoryListProvider);
   final getDetails = ref.read(getInventoryItemDetailsProvider);
   return InventoryNotifier(getInventoryList: getList, getInventoryItemDetails: getDetails);
+final inventoryNotifierProvider = StateNotifierProvider<InventoryNotifier, InventoryState>((ref) {
+  final getList = ref.read(getInventoryListProvider);
+  return InventoryNotifier(getInventoryList: getList);
 });
