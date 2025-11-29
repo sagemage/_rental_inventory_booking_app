@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "526856370239",
+    "project_id": "rental-inventory-booking",
+    "storage_bucket": "rental-inventory-booking.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526856370239:android:5917e909bfbd5b5750608a",
+        "android_client_info": {
+          "package_name": "com.example.rental_inventory_booking"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIzaTq3Ncs3viqIoPEBU3PpkbhUYazPf8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526856370239:android:1d18bdfc2aa5b38d50608a",
+        "android_client_info": {
+          "package_name": "com.example.rental_inventory_booking_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIzaTq3Ncs3viqIoPEBU3PpkbhUYazPf8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
