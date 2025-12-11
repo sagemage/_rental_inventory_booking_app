@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:rental_inventory_booking_app/features/booking/domain/entities/booking.dart';
 import 'package:rental_inventory_booking_app/features/booking/domain/usecases/create_booking.dart';
 import 'package:rental_inventory_booking_app/features/booking/domain/usecases/get_bookings_for_user.dart';

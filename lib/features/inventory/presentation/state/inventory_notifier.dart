@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:rental_inventory_booking_app/features/inventory/domain/entities/inventory_item.dart';
 import 'package:rental_inventory_booking_app/features/inventory/domain/usecases/get_inventory_list.dart';
 import 'package:rental_inventory_booking_app/features/inventory/domain/usecases/get_inventory_item_details.dart';

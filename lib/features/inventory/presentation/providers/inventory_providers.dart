@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import '../../data/datasources/inventory_remote_data_source_impl.dart';
 import '../../data/repositories/inventory_repository_impl.dart';
 import '../../domain/usecases/get_inventory_list.dart';

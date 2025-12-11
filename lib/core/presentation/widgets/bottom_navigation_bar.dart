@@ -11,8 +11,8 @@ class BottomNavigationBarWidget extends StatelessWidget {
     
     
     final currentPath = ModalRoute.of(context)?.settings.name; 
-    if (currentPath != null && currentPath != destinations[index]) {
-      context.go(destinations[index]);
+    if (currentPath != destinations[index]) {
+      context.go(destinations[index]); // This is the line that should change the page
     }
   }
 

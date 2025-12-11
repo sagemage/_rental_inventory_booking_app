@@ -301,13 +301,13 @@ class AppTheme {
       ),
       
       // Card Theme
-      cardTheme: CardTheme(
+      cardTheme: const CardThemeData().copyWith(
         color: Colors.white,
-        elevation: 1,
-        margin: EdgeInsets.zero,
+        elevation: 4,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
       
       // Chip Theme

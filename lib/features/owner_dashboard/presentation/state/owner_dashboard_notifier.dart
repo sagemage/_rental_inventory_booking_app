@@ -1,5 +1,5 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import '../../domain/entities/owner_dashboard.dart';
 import '../../domain/usecases/get_dashboard_overview.dart';
 import '../../domain/usecases/get_owner_bookings.dart';

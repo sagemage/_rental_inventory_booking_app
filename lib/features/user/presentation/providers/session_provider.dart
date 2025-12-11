@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:rental_inventory_booking_app/features/user/domain/entities/user.dart';
 
 /// Simple session provider exposing the current user's role.

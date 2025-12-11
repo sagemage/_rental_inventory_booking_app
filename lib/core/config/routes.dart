@@ -3,11 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:rental_inventory_booking_app/core/presentation/shell_screen.dart';
+import 'package:rental_inventory_booking_app/features/owner_dashboard/presentation/pages/owner_dashboard_page.dart';
+
 import 'package:rental_inventory_booking_app/features/inventory/presentation/pages/inventory_list_page.dart';
 import 'package:rental_inventory_booking_app/features/inventory/presentation/pages/inventory_details_screen.dart';
+
 import 'package:rental_inventory_booking_app/features/booking/presentation/pages/booking_list_page.dart';
-import 'package:rental_inventory_booking_app/features/user/presentation/pages/profile_screen.dart';
-import 'package:rental_inventory_booking_app/features/owner/presentation/pages/owner_dashboard_page.dart'; 
+import 'package:rental_inventory_booking_app/features/user/presentation/pages/profile_screen.dart'; 
 
 
 final GoRouter router = GoRouter(

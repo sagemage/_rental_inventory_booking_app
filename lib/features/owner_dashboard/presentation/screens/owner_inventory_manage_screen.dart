@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../providers/inventory_providers.dart';
+import '../../../inventory/presentation/providers/inventory_providers.dart';
 
 class OwnerInventoryManageScreen extends ConsumerStatefulWidget {
   const OwnerInventoryManageScreen({super.key});
