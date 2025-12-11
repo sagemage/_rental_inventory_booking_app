@@ -5,7 +5,6 @@ import 'package:rental_inventory_booking_app/features/inventory/domain/usecases/
 import 'package:rental_inventory_booking_app/core/error/failures.dart';
 
 /// Presentation state for the Inventory feature.
-import 'package:rental_inventory_booking_app/core/error/failures.dart';
 
 class InventoryState {
   final List<InventoryItem> items;
@@ -28,9 +27,12 @@ class InventoryState {
 /// StateNotifier that holds the use cases as attributes.
 class InventoryNotifier extends StateNotifier<InventoryState> {
   final GetInventoryList getInventoryList;
-  final GetInventoryItemDetails getInventoryItemDetails;
+  final GetInventoryItemDetails getInventoryItemDetails; 
 
-  InventoryNotifier({required this.getInventoryList, required this.getInventoryItemDetails}) : super(const InventoryState());
+  InventoryNotifier({
+  required this.getInventoryList,
+  required this.getInventoryItemDetails, // <--- Add this to the constructor
+}) : super(const InventoryState());
 
   /// Loads the full inventory list and updates state accordingly.
   Future<void> loadInventoryList() async {
@@ -57,22 +59,5 @@ class InventoryNotifier extends StateNotifier<InventoryState> {
   String _mapFailureToMessage(Failure failure) {
     return failure is ServerFailure ? 'Server error: ${failure.message}' : 'Unexpected error';
   }
-      error: error ?? this.error,
-    );
-  }
 }
 
-class InventoryNotifier extends StateNotifier<InventoryState> {
-  final GetInventoryList getInventoryList;
-
-  InventoryNotifier({required this.getInventoryList}) : super(const InventoryState());
-
-  Future<void> loadInventoryList() async {
-    state = state.copyWith(isLoading: true, error: null);
-    final res = await getInventoryList.call();
-    res.fold(
-      (f) => state = state.copyWith(isLoading: false, error: (f as ServerFailure).message),
-      (list) => state = state.copyWith(isLoading: false, items: list),
-    );
-  }
-}

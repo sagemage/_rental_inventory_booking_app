@@ -1,11 +1,25 @@
-import 'package:flutter/material.dart';
-import 'package:rental_inventory_booking_app/core/theme/theme.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'core/error/router/routes.dart';
-import 'core/error/theme/theme.dart';
+// lib/main.dart
 
-void main() {
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:go_router/go_router.dart';
+
+// Ensure these imports point to the correct, clean files:
+import 'package:rental_inventory_booking_app/firebase_options.dart'; 
+import 'package:rental_inventory_booking_app/core/theme/theme.dart';
+import 'package:rental_inventory_booking_app/core/config/routes.dart'; 
+
+void main() async {
+  // Required for Flutter to call native code, like Firebase initialization
+  WidgetsFlutterBinding.ensureInitialized(); 
+  
+  // Initialize Firebase using the auto-generated options
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  
+  // Wrap the app in ProviderScope for Riverpod state management
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -13,24 +27,23 @@ class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Rental Inventory Booking App',
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.light,
-      home: const MyHomePage(title: 'Rental Inventory Booking'),
-  Widget build(BuildContext context, WidgetRef ref) {
+  // Correct method signature for ConsumerWidget
+  Widget build(BuildContext context, WidgetRef ref) { 
+    // Watch the GoRouter configuration defined in routes.dart
     final GoRouter router = ref.watch(routerProvider);
 
     return MaterialApp.router(
       title: 'Rental Inventory Booking App',
-      routerConfig: router,
+      
+      // Use the router configuration
+      routerConfig: router, 
+      
+      // Apply theming
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.system, // Use system setting for light/dark mode
+      
+      debugShowCheckedModeBanner: false,
     );
   }
 }
-
-// Keep the default demo home widget removed — routing will show the inventory screens
