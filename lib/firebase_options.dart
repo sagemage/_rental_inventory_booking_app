@@ -56,8 +56,8 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAIzaTq3Ncs3viqIoPEBU3PpkbhUYazPf8',
-    appId: '1:526856370239:android:1d18bdfc2aa5b38d50608a',
+    apiKey: 'AIzaSyAj29N9-VwGgJQ4PM_hoSGvVr41J0KiG2Q',
+    appId: '1:526856370239:android:5917e909bfbd5b5750608a',
     messagingSenderId: '526856370239',
     projectId: 'rental-inventory-booking',
     storageBucket: 'rental-inventory-booking.firebasestorage.app',

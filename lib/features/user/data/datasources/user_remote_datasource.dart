@@ -7,17 +7,18 @@ abstract class UserRemoteDataSource {
   /// Throws an [Exception] for any error.
   Future<UserModel> getCurrentUser();
 
+
   Future<UserModel> signUp({
     required String fullName,
     required String phoneNumber,
+    required String deliveryAddress,
     String? email,
-    String? address,
     required String password,
-    required UserRole role,
+    UserRole role = UserRole.client,
   });
 
   Future<UserModel> login({
-    required String phoneNumber,
+    required String email,
     required String password,
   });
 

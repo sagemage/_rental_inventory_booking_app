@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:rental_inventory_booking_app/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rental_inventory_booking_app/features/user/data/models/user_model.dart';
 import 'package:rental_inventory_booking_app/features/user/domain/entities/user.dart';
-import 'dart:developer'; // <--- NEW IMPORT for logging
+import 'dart:developer'; 
 
 // --- DEFINED TEST PASSWORD ---
 // This is the password you will use to log in to ALL seeded accounts.
@@ -25,41 +26,42 @@ Future<void> main(List<String> args) async {
   final auth = FirebaseAuth.instance; // Initialize Auth
   final usersCollection = firestore.collection('users');
 
+
   // Sample users for UAT - Removed placeholder IDs as they are overwritten by Auth UID
   final List<Map<String, dynamic>> initialUsersData = [
     {
       'fullName': 'John Smith (Client)',
       'phoneNumber': '+1234567890',
       'email': 'john.smith@example.com',
-      'address': '123 Main St, City, State 12345',
+      'deliveryAddress': '123 Main St, City, State 12345',
       'role': UserRole.client,
     },
     {
       'fullName': 'Jane Johnson (Client)',
       'phoneNumber': '+1234567891',
       'email': 'jane.johnson@example.com',
-      'address': '456 Oak Ave, City, State 12346',
+      'deliveryAddress': '456 Oak Ave, City, State 12346',
       'role': UserRole.client,
     },
     {
       'fullName': 'Mike Wilson (Owner)',
       'phoneNumber': '+1234567892',
       'email': 'mike.wilson@example.com',
-      'address': '789 Pine Rd, City, State 12347',
+      'deliveryAddress': '789 Pine Rd, City, State 12347',
       'role': UserRole.owner,
     },
     {
       'fullName': 'Sarah Davis (Owner)',
       'phoneNumber': '+1234567893',
       'email': 'sarah.davis@example.com',
-      'address': '321 Elm St, City, State 12348',
+      'deliveryAddress': '321 Elm St, City, State 12348',
       'role': UserRole.owner,
     },
     {
       'fullName': 'Admin User',
       'phoneNumber': '+1234567894',
       'email': 'admin@example.com',
-      'address': '999 Admin Ave, City, State 12349',
+      'deliveryAddress': '999 Admin Ave, City, State 12349',
       'role': UserRole.admin,
     },
   ];
@@ -83,6 +85,7 @@ Future<void> main(List<String> args) async {
         final uid = userCredential.user!.uid;
         log('Created Auth user: $email with UID $uid'); // Replaced print() with log()
         
+
         // Create the final UserModel using the Auth UID
         final userModel = UserModel(
           id: uid, 
@@ -91,8 +94,9 @@ Future<void> main(List<String> args) async {
           // and let the UserModel's nullable definition handle the String? type.
           phoneNumber: userData['phoneNumber'] as String,
           email: email,
-          address: userData['address'] as String,
+          deliveryAddress: userData['deliveryAddress'] as String,
           role: userData['role'] as UserRole,
+          createdAt: DateTime.now(),
         );
         seededUsers.add(userModel);
 
@@ -109,6 +113,7 @@ Future<void> main(List<String> args) async {
           
           final uid = userCredential.user!.uid;
           
+
           // Create the final UserModel using the existing Auth UID
           final userModel = UserModel(
             id: uid, 
@@ -117,8 +122,9 @@ Future<void> main(List<String> args) async {
             // and let the UserModel's nullable definition handle the String? type.
             phoneNumber: userData['phoneNumber'] as String,
             email: email,
-            address: userData['address'] as String,
+            deliveryAddress: userData['deliveryAddress'] as String,
             role: userData['role'] as UserRole,
+            createdAt: DateTime.now(),
           );
           seededUsers.add(userModel);
           

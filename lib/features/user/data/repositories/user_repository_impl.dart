@@ -26,21 +26,22 @@ class UserRepositoryImpl implements UserRepository {
     }
   }
 
+
   @override
   Future<Either<Failure, User>> signUp({
     required String fullName,
     required String phoneNumber,
+    required String deliveryAddress,
     String? email,
-    String? address,
     required String password,
-    required UserRole role,
+    UserRole role = UserRole.client,
   }) async {
     try {
       final userModel = await remoteDataSource.signUp(
         fullName: fullName,
         phoneNumber: phoneNumber,
+        deliveryAddress: deliveryAddress,
         email: email,
-        address: address,
         password: password,
         role: role,
       );
@@ -56,11 +57,11 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<Failure, User>> login({
-    required String phoneNumber,
+    required String email,
     required String password,
   }) async {
     try {
-      final userModel = await remoteDataSource.login(phoneNumber: phoneNumber, password: password);
+      final userModel = await remoteDataSource.login(email: email, password: password);
       return Right(userModel);
     } on fb_auth.FirebaseAuthException catch (e) {
       return Left(AuthFailure(e.message));
@@ -85,6 +86,7 @@ class UserRepositoryImpl implements UserRepository {
     }
   }
 
+
   @override
   Future<Either<Failure, User>> updateProfile(User user) async {
     try {
@@ -96,8 +98,9 @@ class UserRepositoryImpl implements UserRepository {
               fullName: user.fullName,
               phoneNumber: user.phoneNumber,
               email: user.email,
-              address: user.address,
+              deliveryAddress: user.deliveryAddress,
               role: user.role,
+              createdAt: user.createdAt,
             );
 
       final updated = await remoteDataSource.updateProfile(userModel);

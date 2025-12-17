@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import '../providers/inventory_providers.dart';
+import '../../domain/usecases/check_availability.dart';
 
 class InventoryDetailScreen extends ConsumerStatefulWidget {
   final String id;
@@ -88,10 +90,28 @@ class _InventoryDetailScreenState extends ConsumerState<InventoryDetailScreen> {
                     const SizedBox(height: 20),
                     // Availability check / Proceed
                     ElevatedButton(
-                      onPressed: (selectedRange != null && quantity > 0 && quantity <= item.quantityAvailable)
-                          ? () {
-                              // Here you would check bookings and proceed to booking flow.
-                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Proceed to booking (not implemented)')));
+                      onPressed: (selectedRange != null && quantity > 0)
+                          ? () async {
+                              // Check availability
+                              final checkAvailability = ref.read(checkAvailabilityProvider);
+                              final result = await checkAvailability.call(CheckAvailabilityParams(
+                                itemId: item.id,
+                                startDate: selectedRange!.start,
+                                endDate: selectedRange!.end,
+                                quantity: quantity,
+                              ));
+
+                              result.fold(
+                                (failure) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: ${failure.message}'))),
+                                (available) {
+                                  if (available) {
+                                    // Navigate to booking
+                                    context.go('/item/${item.id}?startDate=${selectedRange!.start.toIso8601String()}&endDate=${selectedRange!.end.toIso8601String()}&quantity=$quantity');
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Not available for selected dates/quantity. Try different dates or less quantity.')));
+                                  }
+                                },
+                              );
                             }
                           : null,
                       child: const Text('Proceed to Booking'),

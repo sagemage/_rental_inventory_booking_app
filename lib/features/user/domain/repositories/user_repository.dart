@@ -4,16 +4,17 @@ import 'package:rental_inventory_booking_app/features/user/domain/entities/user.
 
 abstract class UserRepository {
   Future<Either<Failure, User>> getCurrentUser();
+
   Future<Either<Failure, User>> signUp({
     required String fullName,
     required String phoneNumber,
+    required String deliveryAddress,
     String? email,
-    String? address,
     required String password,
-    required UserRole role,
+    UserRole role = UserRole.client,
   });
   Future<Either<Failure, User>> login({
-    required String phoneNumber,
+    required String email,
     required String password,
   });
   Future<Either<Failure, void>> signOut();

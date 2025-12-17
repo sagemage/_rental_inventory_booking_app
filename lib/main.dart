@@ -1,14 +1,11 @@
-// lib/main.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:go_router/go_router.dart';
 
-// Ensure these imports point to the correct, clean files:
 import 'package:rental_inventory_booking_app/firebase_options.dart'; 
-import 'package:rental_inventory_booking_app/core/theme/theme.dart';
-import 'package:rental_inventory_booking_app/core/config/routes.dart'; 
+import 'package:rental_inventory_booking_app/core/config/theme.dart';
+import 'package:rental_inventory_booking_app/core/router/routes.dart'; 
 
 void main() async {
   // Required for Flutter to call native code, like Firebase initialization
@@ -41,7 +38,7 @@ class MyApp extends ConsumerWidget {
       // Apply theming
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system, // Use system setting for light/dark mode
+      themeMode: ThemeMode.light,
       
       debugShowCheckedModeBanner: false,
     );

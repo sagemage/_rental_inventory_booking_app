@@ -6,4 +6,7 @@ abstract class InventoryRemoteDataSource {
 
   /// Returns single inventory item model by id
   Future<InventoryItemModel> getInventoryItemDetails(String id);
+
+  /// Checks if item is available for the given dates and quantity
+  Future<bool> checkAvailability(String itemId, DateTime startDate, DateTime endDate, int quantity);
 }

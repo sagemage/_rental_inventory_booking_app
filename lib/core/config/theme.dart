@@ -199,8 +199,6 @@ class AppTheme {
         onError: Colors.white,
         surface: surfaceColor,
         onSurface: textDarkColor,
-        background: backgroundColor,
-        onBackground: textDarkColor,
       ),
       
       // Scaffold
@@ -375,13 +373,11 @@ class AppTheme {
         secondary: secondaryColor,
         onSecondary: Colors.black,
         tertiary: tertiaryColor,
-        onTertiary: Colors.black,
+        onTertiary: const Color.fromARGB(255, 123, 88, 88),
         error: errorColor,
         onError: Colors.black,
         surface: darkSurface,
         onSurface: Colors.white,
-        background: darkBg,
-        onBackground: Colors.white,
       ),
       
       scaffoldBackgroundColor: darkBg,

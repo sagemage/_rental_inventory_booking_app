@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_riverpod/legacy.dart';
+import 'package:rental_inventory_booking_app/core/providers/firebase_providers.dart';
 import '../state/owner_dashboard_notifier.dart';
 import '../../data/datasources/owner_dashboard_remote_data_source.dart';
 import '../../data/datasources/owner_dashboard_remote_data_source_impl.dart';
@@ -10,14 +9,9 @@ import '../../domain/usecases/get_dashboard_overview.dart';
 import '../../domain/usecases/get_owner_bookings.dart';
 import '../../domain/usecases/update_booking_status.dart';
 
-// Firebase Firestore instance provider
-final firestoreProvider = Provider((ref) {
-  return FirebaseFirestore.instance;
-});
-
 // Remote data source provider
 final ownerDashboardRemoteDataSourceProvider = Provider<OwnerDashboardRemoteDataSource>((ref) {
-  final firestore = ref.watch(firestoreProvider);
+  final firestore = ref.watch(firebaseFirestoreProvider);
   return OwnerDashboardRemoteDataSourceImpl(firestore: firestore);
 });
 
@@ -44,14 +38,6 @@ final updateBookingStatusProvider = Provider((ref) {
 });
 
 // State notifier provider
-final ownerDashboardNotifierProvider = StateNotifierProvider<OwnerDashboardNotifier, OwnerDashboardState>((ref) {
-  final getDashboardOverview = ref.watch(getDashboardOverviewProvider);
-  final getOwnerBookings = ref.watch(getOwnerBookingsProvider);
-  final updateBookingStatus = ref.watch(updateBookingStatusProvider);
-
-  return OwnerDashboardNotifier(
-    getDashboardOverview: getDashboardOverview,
-    getOwnerBookings: getOwnerBookings,
-    updateBookingStatus: updateBookingStatus,
-  );
+final ownerDashboardNotifierProvider = NotifierProvider<OwnerDashboardNotifier, OwnerDashboardState>(() {
+  return OwnerDashboardNotifier();
 });

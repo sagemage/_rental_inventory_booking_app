@@ -8,11 +8,11 @@ class Login {
   Login(this.repository);
 
   Future<Either<Failure, User>> call({
-    required String phoneNumber,
+    required String email,
     required String password,
   }) {
     return repository.login(
-      phoneNumber: phoneNumber,
+      email: email,
       password: password,
     );
   }

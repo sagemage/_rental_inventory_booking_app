@@ -1,45 +1,68 @@
 import 'package:flutter/material.dart';
-// CORRECTED IMPORT: Using the correct file name 'bottom_navigation_bar.dart'
-import 'package:rental_inventory_booking_app/core/presentation/widgets/bottom_navigation_bar.dart'; 
+import 'package:go_router/go_router.dart';
 
-class ShellScreen extends StatelessWidget {
+class ShellScreen extends StatefulWidget {
+  final Widget child;
+
   const ShellScreen({
     super.key,
     required this.child,
   });
 
-  final Widget child; 
+  @override
+  State<ShellScreen> createState() => _ShellScreenState();
+}
 
-  int _calculateSelectedIndex(BuildContext context) {
-    final location = ModalRoute.of(context)?.settings.name;
+class _ShellScreenState extends State<ShellScreen> {
+  int _selectedIndex = 0;
 
-    // Check if the location is valid before calling startsWith
-    if (location != null) {
-      if (location.startsWith('/inventory')) {
-        return 0;
-      }
-      if (location.startsWith('/booking')) {
-        return 1;
-      }
-      if (location.startsWith('/profile')) {
-        return 2;
-      }
-      if (location.startsWith('/owner')) {
-        return 3;
-      }
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    
+    switch (index) {
+      case 0:
+        context.go('/inventory');
+        break;
+      case 1:
+        context.go('/booking');
+        break;
+      case 2:
+        context.go('/profile');
+        break;
+      case 3:
+        context.go('/owner-dashboard');
+        break;
     }
-    return 0; // Default to the first tab (Inventory)
   }
 
   @override
   Widget build(BuildContext context) {
-    final selectedIndex = _calculateSelectedIndex(context);
-
     return Scaffold(
-      body: child, 
-
-      bottomNavigationBar: BottomNavigationBarWidget(
-        selectedIndex: selectedIndex,
+      body: widget.child,
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.inventory_2),
+            label: 'Inventory',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book_online),
+            label: 'Bookings',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.dashboard),
+            label: 'Owner',
+          ),
+        ],
       ),
     );
   }

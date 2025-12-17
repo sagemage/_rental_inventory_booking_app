@@ -30,4 +30,14 @@ class InventoryRepositoryImpl implements InventoryRepository {
       return Left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> checkAvailability(String itemId, DateTime startDate, DateTime endDate, int quantity) async {
+    try {
+      final available = await remoteDataSource.checkAvailability(itemId, startDate, endDate, quantity);
+      return Right(available);
+    } on Exception catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
 }

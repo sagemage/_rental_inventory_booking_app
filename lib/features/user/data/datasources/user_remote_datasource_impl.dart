@@ -23,14 +23,15 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     return UserModel.fromMap(data, id: doc.id);
   }
 
+
   @override
   Future<UserModel> signUp({
     required String fullName,
     required String phoneNumber,
+    required String deliveryAddress,
     String? email,
-    String? address,
     required String password,
-    required UserRole role,
+    UserRole role = UserRole.client,
   }) async {
     // Firebase Auth primarily supports email/password; map phoneNumber -> synthetic email when needed.
     final signupEmail = (email != null && email.isNotEmpty) ? email : _emailFromPhone(phoneNumber);
@@ -41,14 +42,16 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     );
 
     final uid = credential.user!.uid;
+    final createdAt = DateTime.now();
 
     final model = UserModel(
       id: uid,
       fullName: fullName,
       phoneNumber: phoneNumber,
       email: email,
-      address: address,
-      role: UserModel.roleFromString(role.toString().split('.').last),
+      deliveryAddress: deliveryAddress,
+      role: role,
+      createdAt: createdAt,
     );
 
     await _usersRef.doc(uid).set(model.toMap());
@@ -56,8 +59,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 
   @override
-  Future<UserModel> login({required String phoneNumber, required String password}) async {
-    final email = _emailFromPhone(phoneNumber);
+  Future<UserModel> login({required String email, required String password}) async {
     final result = await auth.signInWithEmailAndPassword(email: email, password: password);
     final uid = result.user!.uid;
     final doc = await _usersRef.doc(uid).get();

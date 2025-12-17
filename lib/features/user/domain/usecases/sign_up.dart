@@ -7,19 +7,20 @@ class SignUp {
   final UserRepository repository;
   SignUp(this.repository);
 
+
   Future<Either<Failure, User>> call({
     required String fullName,
     required String phoneNumber,
+    required String deliveryAddress,
     String? email,
-    String? address,
     required String password,
-    required UserRole role,
+    UserRole role = UserRole.client,
   }) {
     return repository.signUp(
       fullName: fullName,
       phoneNumber: phoneNumber,
+      deliveryAddress: deliveryAddress,
       email: email,
-      address: address,
       password: password,
       role: role,
     );

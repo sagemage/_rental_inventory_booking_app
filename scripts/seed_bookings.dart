@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:rental_inventory_booking_app/firebase_options.dart';
 
 Future<void> main(List<String> args) async {
   // Initialize Firebase
@@ -103,18 +104,3 @@ Future<void> main(List<String> args) async {
   }
 }
 
-// Default Firebase options (placeholder - configure with your Firebase project)
-class DefaultFirebaseOptions {
-  static FirebaseOptions get currentPlatform {
-    // Replace with your actual Firebase configuration
-    return const FirebaseOptions(
-      apiKey: 'YOUR_API_KEY',
-      appId: 'YOUR_APP_ID',
-      messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-      projectId: 'YOUR_PROJECT_ID',
-      authDomain: 'YOUR_PROJECT_ID.firebaseapp.com',
-      databaseURL: 'https://YOUR_PROJECT_ID.firebaseio.com',
-      storageBucket: 'YOUR_PROJECT_ID.appspot.com',
-    );
-  }
-}

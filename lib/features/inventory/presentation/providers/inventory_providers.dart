@@ -1,44 +1,41 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod/legacy.dart';
 import '../../data/datasources/inventory_remote_data_source_impl.dart';
 import '../../data/repositories/inventory_repository_impl.dart';
 import '../../domain/usecases/get_inventory_list.dart';
 import '../../domain/usecases/get_inventory_item_details.dart';
+import '../../domain/usecases/check_availability.dart';
 import '../state/inventory_notifier.dart';
-
-
-/// Firebase instance provider (injected as the root datasource dependency)
-final firebaseFirestoreProvider = Provider<FirebaseFirestore>((ref) {
-  return FirebaseFirestore.instance;
-});
+import 'package:rental_inventory_booking_app/core/providers/firebase_providers.dart';
 
 /// Remote data source provider
 final inventoryRemoteDataSourceProvider = Provider<FirebaseInventoryRemoteDataSource>((ref) {
-  final firestore = ref.read(firebaseFirestoreProvider);
+  final firestore = ref.watch(firebaseFirestoreProvider);
   return FirebaseInventoryRemoteDataSource(firestore: firestore);
 });
 
 /// Repository provider
 final inventoryRepositoryProvider = Provider<InventoryRepositoryImpl>((ref) {
-  final remote = ref.read(inventoryRemoteDataSourceProvider);
+  final remote = ref.watch(inventoryRemoteDataSourceProvider);
   return InventoryRepositoryImpl(remoteDataSource: remote);
 });
 
 /// Use case providers
 final getInventoryListProvider = Provider<GetInventoryList>((ref) {
-  final repo = ref.read(inventoryRepositoryProvider);
+  final repo = ref.watch(inventoryRepositoryProvider);
   return GetInventoryList(repo);
 });
 
 final getInventoryItemDetailsProvider = Provider<GetInventoryItemDetails>((ref) {
-  final repo = ref.read(inventoryRepositoryProvider);
+  final repo = ref.watch(inventoryRepositoryProvider);
   return GetInventoryItemDetails(repo);
 });
 
+final checkAvailabilityProvider = Provider<CheckAvailability>((ref) {
+  final repo = ref.watch(inventoryRepositoryProvider);
+  return CheckAvailability(repo);
+});
+
 /// StateNotifier provider (presentation layer)
-final inventoryNotifierProvider = StateNotifierProvider<InventoryNotifier, InventoryState>((ref) {
-  final getList = ref.read(getInventoryListProvider);
-  final getDetails = ref.read(getInventoryItemDetailsProvider);
-  return InventoryNotifier(getInventoryList: getList, getInventoryItemDetails: getDetails);
+final inventoryNotifierProvider = NotifierProvider<InventoryNotifier, InventoryState>(() {
+  return InventoryNotifier();
 });

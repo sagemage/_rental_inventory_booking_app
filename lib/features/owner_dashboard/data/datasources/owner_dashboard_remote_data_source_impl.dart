@@ -34,7 +34,8 @@ class OwnerDashboardRemoteDataSourceImpl implements OwnerDashboardRemoteDataSour
       }
     }
 
-    final inventorySnapshot = await firestore.collection('inventory').where('ownerId', isEqualTo: ownerId).get();
+    // inventory items are stored in the 'inventory_items' collection
+    final inventorySnapshot = await firestore.collection('inventory_items').where('ownerId', isEqualTo: ownerId).get();
     final inventoryCount = inventorySnapshot.docs.length;
 
     return OwnerDashboardModel(

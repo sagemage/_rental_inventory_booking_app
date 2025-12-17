@@ -41,8 +41,15 @@ class _BookingItemSelectionScreenState extends ConsumerState<BookingItemSelectio
                     subtitle: Text('\$${item.pricePerDay.toStringAsFixed(2)} / day', style: Theme.of(context).textTheme.bodyMedium),
                     trailing: ElevatedButton(
                       onPressed: () {
+
                         // Add item to cart with quantity=1 for simplicity
-                        bookingNotifier.addOrUpdateCartItem(BookingItemModel(itemId: item.id, quantity: 1));
+                        bookingNotifier.addOrUpdateCartItem(BookingItemModel(
+                          inventoryId: item.id,
+                          name: item.name,
+                          dailyRate: item.pricePerDay,
+                          quantity: 1,
+                          reservedQuantity: 0,
+                        ));
                         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to booking')));
                       },
                       child: const Text('Add'),
